@@ -45,7 +45,7 @@
             this.btnNowPlaying.TabIndex = 0;
             this.btnNowPlaying.Text = "What\'s playing? ♫";
             this.btnNowPlaying.UseVisualStyleBackColor = true;
-            this.btnNowPlaying.Click += new System.EventHandler(this.button1_Click);
+            this.btnNowPlaying.Click += new System.EventHandler(this.GetNowPlaying_Click);
             // 
             // txtCLT
             // 
