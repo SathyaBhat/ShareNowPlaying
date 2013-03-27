@@ -22,6 +22,13 @@ namespace ShareNowPlaying
           //  Properties.Settings.Default.apikey = String.Empty;
         }
 
+        private void authenticate_app_dot_net()
+        {
+            AppDotNetAuth appdotnetauthform = new AppDotNetAuth();
+            appdotnetauthform.Show();
+
+        }
+
         private void GetNowPlaying_Click(object sender, EventArgs e)
         {
            
@@ -38,37 +45,12 @@ namespace ShareNowPlaying
 
         private void picADNShare_Click(object sender, EventArgs e)
         {
-
-            if (string.IsNullOrEmpty(Properties.Settings.Default.apikey))
-            {
-
-                string api_base = "https://alpha.app.net/oauth/authenticate?client_id=";
-                string redirect_url = "http://sbhat.me/auth/";
-                browser.Visible = true;
-                Uri auth_url = new Uri(api_base + Properties.Settings.Default.clientID + "&response_type=token&redirect_url=" + redirect_url + "&scope=write_post");
-                browser.Navigate(auth_url);
-            }
-            else if (!string.IsNullOrEmpty(Properties.Settings.Default.apikey) &&  !string.IsNullOrEmpty(txtCLT.Text))
+   
+            if (!string.IsNullOrEmpty(Properties.Settings.Default.apikey) &&  !string.IsNullOrEmpty(txtCLT.Text))
             {
                 post_to_adn();
             }
         }
-
-  
-
-        private void browser_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
-        {
-            string redirect_url = browser.Url.ToString();
-            if (redirect_url.IndexOf("access_token") != -1)
-            {
-            string access_token = string.Empty;  
-            access_token = redirect_url.Substring(35);
-            Properties.Settings.Default.apikey = access_token;
-                Properties.Settings.Default.Save();
-                browser.Visible = false;
-            }
-        }
-
         private void post_to_adn()
         {
             string apikey = Properties.Settings.Default.apikey.ToString();
@@ -79,6 +61,14 @@ namespace ShareNowPlaying
             RestResponse response = (RestResponse)client.Execute(request);
             var content = response.Content;
 
+        }
+
+        private void Share_Load(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(Properties.Settings.Default.apikey))
+            {
+                authenticate_app_dot_net();
+            }
         }
     }
 }

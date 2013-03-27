@@ -74,7 +74,6 @@
             this.browser.Size = new System.Drawing.Size(580, 341);
             this.browser.TabIndex = 3;
             this.browser.Visible = false;
-            this.browser.DocumentCompleted += new System.Windows.Forms.WebBrowserDocumentCompletedEventHandler(this.browser_DocumentCompleted);
             // 
             // splitter1
             // 
@@ -98,6 +97,7 @@
             this.Controls.Add(this.splitter1);
             this.Name = "Share";
             this.Text = "Share Now Playing ♫";
+            this.Load += new System.EventHandler(this.Share_Load);
             ((System.ComponentModel.ISupportInitialize)(this.picADNShare)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
