@@ -19,7 +19,6 @@ namespace ShareNowPlaying
         public Share()
         {
             InitializeComponent();
-          //  Properties.Settings.Default.apikey = String.Empty;
         }
 
         private void authenticate_app_dot_net()
@@ -31,7 +30,12 @@ namespace ShareNowPlaying
 
         private void GetNowPlaying_Click(object sender, EventArgs e)
         {
-           
+            get_current_playing();
+
+        }
+
+        private void get_current_playing()
+        {
             iTunesApp app = new iTunesApp();
             if (app.CurrentTrack == null)
             {
@@ -39,7 +43,7 @@ namespace ShareNowPlaying
                 return;
             }
             IITTrack track = app.CurrentTrack;
-            txtCLT.Text = "CLT: ♫ \"" + track.Name + "\" by " +  track.Artist + " from the album " + track.Album + " ♫ #ShareNowPlaying";
+            txtCLT.Text = "CLT: ♫ \"" + track.Name + "\" by " + track.Artist + " from the album " + track.Album + " ♫ #ShareNowPlaying";
             Clipboard.SetText(txtCLT.Text);
         }
 
@@ -54,12 +58,24 @@ namespace ShareNowPlaying
         private void post_to_adn()
         {
             string apikey = Properties.Settings.Default.apikey.ToString();
+            string update_message;
             var client = new RestClient(); 
             var request = new RestRequest("https://alpha-api.app.net/stream/0/posts", Method.POST);
-            request.AddParameter("text", txtCLT.Text);
+            update_completed.Text = "Updating to App.net";
+            if (txtCLT.TextLength > 256)
+            {
+                update_message = txtCLT.Text.Substring(255);
+            }
+            else
+            {
+                update_message = txtCLT.Text;
+            }
+                
+            request.AddParameter("text", update_message);
             request.AddParameter("access_token", Properties.Settings.Default.apikey.ToString());
             RestResponse response = (RestResponse)client.Execute(request);
             var content = response.Content;
+            update_completed.Text = "Updated to App.net!";
 
         }
 
@@ -69,6 +85,11 @@ namespace ShareNowPlaying
             {
                 authenticate_app_dot_net();
             }
+        }
+
+        private void txtCLT_TextChanged(object sender, EventArgs e)
+        {
+            charcount.Text = (256 - txtCLT.Text.Length).ToString();
         }
     }
 }

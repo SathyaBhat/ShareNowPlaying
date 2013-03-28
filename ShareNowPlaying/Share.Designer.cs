@@ -32,8 +32,8 @@
             this.btnNowPlaying = new System.Windows.Forms.Button();
             this.txtCLT = new System.Windows.Forms.TextBox();
             this.picADNShare = new System.Windows.Forms.PictureBox();
-            this.browser = new System.Windows.Forms.WebBrowser();
-            this.splitter1 = new System.Windows.Forms.Splitter();
+            this.charcount = new System.Windows.Forms.Label();
+            this.update_completed = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.picADNShare)).BeginInit();
             this.SuspendLayout();
             // 
@@ -49,10 +49,13 @@
             // 
             // txtCLT
             // 
+            this.txtCLT.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.txtCLT.Location = new System.Drawing.Point(12, 52);
             this.txtCLT.Name = "txtCLT";
-            this.txtCLT.Size = new System.Drawing.Size(549, 20);
+            this.txtCLT.Size = new System.Drawing.Size(552, 20);
             this.txtCLT.TabIndex = 1;
+            this.txtCLT.TextChanged += new System.EventHandler(this.txtCLT_TextChanged);
             // 
             // picADNShare
             // 
@@ -65,36 +68,36 @@
             this.picADNShare.TabStop = false;
             this.picADNShare.Click += new System.EventHandler(this.picADNShare_Click);
             // 
-            // browser
+            // charcount
             // 
-            this.browser.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.browser.Location = new System.Drawing.Point(0, 96);
-            this.browser.MinimumSize = new System.Drawing.Size(20, 20);
-            this.browser.Name = "browser";
-            this.browser.Size = new System.Drawing.Size(580, 341);
-            this.browser.TabIndex = 3;
-            this.browser.Visible = false;
+            this.charcount.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.charcount.AutoSize = true;
+            this.charcount.Location = new System.Drawing.Point(539, 80);
+            this.charcount.Name = "charcount";
+            this.charcount.Size = new System.Drawing.Size(25, 13);
+            this.charcount.TabIndex = 5;
+            this.charcount.Text = "256";
             // 
-            // splitter1
+            // update_completed
             // 
-            this.splitter1.Cursor = System.Windows.Forms.Cursors.HSplit;
-            this.splitter1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.splitter1.Location = new System.Drawing.Point(0, 0);
-            this.splitter1.Name = "splitter1";
-            this.splitter1.Size = new System.Drawing.Size(580, 96);
-            this.splitter1.TabIndex = 4;
-            this.splitter1.TabStop = false;
+            this.update_completed.AutoSize = true;
+            this.update_completed.Location = new System.Drawing.Point(425, 80);
+            this.update_completed.Name = "update_completed";
+            this.update_completed.Size = new System.Drawing.Size(79, 13);
+            this.update_completed.TabIndex = 6;
+            this.update_completed.Text = "Ready to post..";
             // 
             // Share
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(580, 437);
-            this.Controls.Add(this.browser);
+            this.ClientSize = new System.Drawing.Size(576, 100);
+            this.Controls.Add(this.update_completed);
+            this.Controls.Add(this.charcount);
             this.Controls.Add(this.picADNShare);
             this.Controls.Add(this.txtCLT);
             this.Controls.Add(this.btnNowPlaying);
-            this.Controls.Add(this.splitter1);
             this.Name = "Share";
             this.Text = "Share Now Playing ♫";
             this.Load += new System.EventHandler(this.Share_Load);
@@ -109,8 +112,8 @@
         private System.Windows.Forms.Button btnNowPlaying;
         private System.Windows.Forms.TextBox txtCLT;
         private System.Windows.Forms.PictureBox picADNShare;
-        private System.Windows.Forms.WebBrowser browser;
-        private System.Windows.Forms.Splitter splitter1;
+        private System.Windows.Forms.Label charcount;
+        private System.Windows.Forms.Label update_completed;
     }
 }
 
