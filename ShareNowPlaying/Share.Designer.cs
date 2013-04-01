@@ -34,6 +34,7 @@
             this.picADNShare = new System.Windows.Forms.PictureBox();
             this.charcount = new System.Windows.Forms.Label();
             this.update_completed = new System.Windows.Forms.Label();
+            this.bwpost = new System.ComponentModel.BackgroundWorker();
             ((System.ComponentModel.ISupportInitialize)(this.picADNShare)).BeginInit();
             this.SuspendLayout();
             // 
@@ -88,6 +89,11 @@
             this.update_completed.TabIndex = 6;
             this.update_completed.Text = "Ready to post..";
             // 
+            // bwpost
+            // 
+            this.bwpost.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bwpost_DoWork);
+            this.bwpost.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bwpost_RunWorkerCompleted);
+            // 
             // Share
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -114,6 +120,7 @@
         private System.Windows.Forms.PictureBox picADNShare;
         private System.Windows.Forms.Label charcount;
         private System.Windows.Forms.Label update_completed;
+        private System.ComponentModel.BackgroundWorker bwpost;
     }
 }
 

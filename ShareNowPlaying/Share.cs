@@ -59,7 +59,6 @@ namespace ShareNowPlaying
         {
             string apikey = Properties.Settings.Default.apikey.ToString();
             string update_message;
-            var client = new RestClient(); 
             var request = new RestRequest("https://alpha-api.app.net/stream/0/posts", Method.POST);
             update_completed.Text = "Updating to App.net";
             if (txtCLT.TextLength > 256)
@@ -73,9 +72,7 @@ namespace ShareNowPlaying
                 
             request.AddParameter("text", update_message);
             request.AddParameter("access_token", Properties.Settings.Default.apikey.ToString());
-            RestResponse response = (RestResponse)client.Execute(request);
-            var content = response.Content;
-            update_completed.Text = "Updated to App.net!";
+            bwpost.RunWorkerAsync(request);
 
         }
 
@@ -90,6 +87,22 @@ namespace ShareNowPlaying
         private void txtCLT_TextChanged(object sender, EventArgs e)
         {
             charcount.Text = (256 - txtCLT.Text.Length).ToString();
+        }
+
+        private void bwpost_DoWork(object sender, DoWorkEventArgs e)
+        {
+            var client = new RestClient(); 
+            RestRequest request = e.Argument as RestRequest;
+            RestResponse response = (RestResponse)client.Execute(request);
+            var content = response.Content;
+            e.Result = content;
+        }
+
+        private void bwpost_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            var content = e.Result;
+            update_completed.Text = "Updated to App.net!";
+
         }
     }
 }
